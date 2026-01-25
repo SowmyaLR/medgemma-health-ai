@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from services.med_models import transcribe_audio, analyze_cough, generate_soap_note
@@ -29,12 +29,12 @@ def read_root():
     return {"message": "Tele-Triage Backend is running"}
 
 @app.post("/api/triage", response_model=TriageResponse)
-async def run_triage(audio_file: UploadFile = File(...)):
+async def run_triage(audio_file: UploadFile = File(...), patient_id: str = Form("Anonymous")):
     # 1. Read file bytes
     file_bytes = await audio_file.read()
     
     # 2. Parallel processing (in threadpool to avoid blocking main loop)
-    print("DEBUG: Received triage request. Offloading to threads.")
+    print(f"DEBUG: Received triage request for Patient {patient_id}. Offloading to threads.")
     transcript_result = await run_in_threadpool(transcribe_audio, file_bytes)
     cough_analysis = await run_in_threadpool(analyze_cough, file_bytes)
     
@@ -51,8 +51,9 @@ async def run_triage(audio_file: UploadFile = File(...)):
     import uuid
     from datetime import datetime
     triage_queue.append({
-        "id": str(uuid.uuid4())[:8],
-        "patientName": "Patient " + str(uuid.uuid4())[:4], # Mock name
+        "id": str(len(triage_queue) + 101), # Simple incremental ID
+        "patientName": patient_id, # Use the actual ID provided
+        "userInitials": patient_id[:2].upper() if len(patient_id) >= 2 else "PT",
         "timestamp": datetime.now().strftime("%I:%M %p"),
         "riskScore": cough_analysis['risk_score'],
         "chiefComplaint": transcript_result['text'],
