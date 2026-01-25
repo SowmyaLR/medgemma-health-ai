@@ -4,8 +4,7 @@
 **MedGemma Tele-Triage**
 
 ### Your team 
-*   **[Member Name]**: Lead Developer (Full Stack & AI Integration) - *Replace with actual name*
-*   **[Member Name]**: Clinical Domain Expert / UX Designer - *Replace with actual name*
+*   **L.R.Sowmya**: Tech Lead Manager
 
 ### Problem statement
 **The Silent Crisis: Triage Bottlenecks & Language Barriers**
