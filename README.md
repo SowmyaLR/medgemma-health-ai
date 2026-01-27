@@ -86,3 +86,8 @@ We simulate the integration of **HeAR (Health Acoustic Representations)** to go 
     npm run dev
     # Visit http://localhost:3000
     ```
+
+## Demo
+
+[![Watch the demo](https://img.youtube.com/vi/0F5j3puTxPI/0.jpg)](https://www.youtube.com/watch?v=0F5j3puTxPI)
+
