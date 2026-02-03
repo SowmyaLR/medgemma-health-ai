@@ -1,4 +1,7 @@
 # Agentic AI Tele-Triage System
+
+<img width="1024" height="1024" alt="Gemini_Generated_Image_ufttwhufttwhuftt" src="https://github.com/user-attachments/assets/36ca12e2-e8ad-417f-a558-b0e4ad5b7746" />
+
 ### Built for the Med-Gemma Impact Challenge
 
 **Tele-Triage** is an autonomous AI agent designed to alleviate clinician burnout and improve patient access to care by automating the "intake-to-documentation" pipeline. 
