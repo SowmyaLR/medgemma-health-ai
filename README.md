@@ -16,16 +16,12 @@ This project directly addresses **two critical crises** in modern healthcare:
 1.  **Clinician Burnout**: Doctors spend up to **50% of their day** on EHR documentation (SOAP notes). Tele-Triage automates this, returning hours to patient care.
 2.  **Triage Bottlenecks**: In tele-health, nurses manually screen thousands of calls. Our "Agentic Workflow" acts as a **Level 1 Triage Agent**, autonomously flagging high-risk patients (e.g., detecting respiratory distress via cough sounds).
 
-## 🏆 Challenge Alignment
-This solution targets multiple prize categories:
 
-### 1. Agentic Workflow Track (Primary Fit)
 The system is not just a chatbot; it is an **Agent**:
 -   **Perceives**: Listens to raw audio (Speech + Cough/Lung sounds).
 -   **Reasons**: Uses **MedGemma** to interpret the clinical narrative (`S` and `O` sections).
 -   **Acts**: Synthesizes a structured medical record (`A` and `P` draft) and pushes it to the clinician's queue.
 
-### 2. Novel Tasks Track (HeAR Integration)
 We simulate the integration of **HeAR (Health Acoustic Representations)** to go beyond text. By analyzing the *sound* of a cough (not just the description of it), we introduce a novel modality—**Acoustic Biomarkers**—into the standard LLM reasoning chain.
 
 ---
