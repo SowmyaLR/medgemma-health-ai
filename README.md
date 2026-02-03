@@ -28,6 +28,56 @@ We simulate the integration of **HeAR (Health Acoustic Representations)** to go 
 
 ## ⚙️ Technical Architecture
 
+```mermaid
+graph TD
+    %% Users
+    Patient(["👤 Patient"])
+    Doctor(["👨‍⚕️ Doctor"])
+
+    %% Frontend
+    subgraph Frontend [Next.js Client]
+        P_Portal["Patient Portal"]
+        D_Portal["Doctor Dashboard"]
+    end
+
+    %% Backend
+    subgraph Backend [FastAPI Server]
+        Router["API Router"]
+        
+        subgraph Processing [AI Processing Pipeline]
+            Whisper["🗣️ Whisper ASR<br/>(Speech-to-Text)"]
+            Librosa["🌊 Acoustic Analysis<br/>(Breathing/Cough Detection)"]
+            MedGemma["🧠 MedGemma 4B<br/>(Clinical Reasoning)"]
+        end
+    end
+
+    %% External/Local Service
+    Ollama["🦙 Ollama Local Inference"]
+
+    %% Connections
+    Patient -->|Voice/Symptom Input| P_Portal
+    P_Portal -->|Audio Data| Router
+    
+    Router --> Whisper
+    Router --> Librosa
+    
+    Whisper -->|Transcript| MedGemma
+    Librosa -->|Acoustic Biomarkers| MedGemma
+    
+    MedGemma <-->|Llama 3/Gemma Weights| Ollama
+    
+    MedGemma -->|SOAP Note & Triage Score| D_Portal
+    D_Portal -->|Review & Action| Doctor
+    
+    classDef user fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef component fill:#f3e5f5,stroke:#4a148c,stroke-width:2px;
+    classDef ai fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    
+    class Patient,Doctor user;
+    class P_Portal,D_Portal,Router component;
+    class Whisper,Librosa,MedGemma,Ollama ai;
+```
+
 ### **Hybrid AI Stack**
 -   **Reasoning Engine**: `MedGemma 4B` (running locally via **Ollama**).
     -   *Why?* Ensures medical domain accuracy and data privacy (local inference).
