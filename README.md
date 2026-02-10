@@ -533,7 +533,7 @@ If VaidyaSaarathi helps your healthcare organization or inspires your work, plea
 
 [![Watch Demo](https://img.shields.io/badge/▶️-Watch%20Demo-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=0F5j3puTxPI)
 [![View Code](https://img.shields.io/badge/💻-View%20Code-blue?style=for-the-badge&logo=github)](https://github.com/SowmyaLR/medgemma-health-ai)
-[![Read Writeup](https://img.shields.io/badge/📄-Read%20Writeup-green?style=for-the-badge)](HACKATHON_WRITEUP.md)
+[![Read Writeup](https://img.shields.io/badge/📄-Read%20Writeup-green?style=for-the-badge)](specs/writeup.md)
 
 ---
 
