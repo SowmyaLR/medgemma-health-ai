@@ -1,4 +1,7 @@
 # Agentic AI Tele-Triage System
+
+<img width="1024" height="1024" alt="Gemini_Generated_Image_ufttwhufttwhuftt" src="https://github.com/user-attachments/assets/36ca12e2-e8ad-417f-a558-b0e4ad5b7746" />
+
 ### Built for the Med-Gemma Impact Challenge
 
 **Tele-Triage** is an autonomous AI agent designed to alleviate clinician burnout and improve patient access to care by automating the "intake-to-documentation" pipeline. 
@@ -13,21 +16,67 @@ This project directly addresses **two critical crises** in modern healthcare:
 1.  **Clinician Burnout**: Doctors spend up to **50% of their day** on EHR documentation (SOAP notes). Tele-Triage automates this, returning hours to patient care.
 2.  **Triage Bottlenecks**: In tele-health, nurses manually screen thousands of calls. Our "Agentic Workflow" acts as a **Level 1 Triage Agent**, autonomously flagging high-risk patients (e.g., detecting respiratory distress via cough sounds).
 
-## 🏆 Challenge Alignment
-This solution targets multiple prize categories:
 
-### 1. Agentic Workflow Track (Primary Fit)
 The system is not just a chatbot; it is an **Agent**:
 -   **Perceives**: Listens to raw audio (Speech + Cough/Lung sounds).
 -   **Reasons**: Uses **MedGemma** to interpret the clinical narrative (`S` and `O` sections).
 -   **Acts**: Synthesizes a structured medical record (`A` and `P` draft) and pushes it to the clinician's queue.
 
-### 2. Novel Tasks Track (HeAR Integration)
 We simulate the integration of **HeAR (Health Acoustic Representations)** to go beyond text. By analyzing the *sound* of a cough (not just the description of it), we introduce a novel modality—**Acoustic Biomarkers**—into the standard LLM reasoning chain.
 
 ---
 
 ## ⚙️ Technical Architecture
+
+```mermaid
+graph TD
+    %% Users
+    Patient(["👤 Patient"])
+    Doctor(["👨‍⚕️ Doctor"])
+
+    %% Frontend
+    subgraph Frontend [Next.js Client]
+        P_Portal["Patient Portal"]
+        D_Portal["Doctor Dashboard"]
+    end
+
+    %% Backend
+    subgraph Backend [FastAPI Server]
+        Router["API Router"]
+        
+        subgraph Processing [AI Processing Pipeline]
+            Whisper["🗣️ Whisper ASR<br/>(Speech-to-Text)"]
+            Librosa["🌊 Acoustic Analysis<br/>(Breathing/Cough Detection)"]
+            MedGemma["🧠 MedGemma 4B<br/>(Clinical Reasoning)"]
+        end
+    end
+
+    %% External/Local Service
+    Ollama["🦙 Ollama Local Inference"]
+
+    %% Connections
+    Patient -->|Voice/Symptom Input| P_Portal
+    P_Portal -->|Audio Data| Router
+    
+    Router --> Whisper
+    Router --> Librosa
+    
+    Whisper -->|Transcript| MedGemma
+    Librosa -->|Acoustic Biomarkers| MedGemma
+    
+    MedGemma <-->|Llama 3/Gemma Weights| Ollama
+    
+    MedGemma -->|SOAP Note & Triage Score| D_Portal
+    D_Portal -->|Review & Action| Doctor
+    
+    classDef user fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef component fill:#f3e5f5,stroke:#4a148c,stroke-width:2px;
+    classDef ai fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    
+    class Patient,Doctor user;
+    class P_Portal,D_Portal,Router component;
+    class Whisper,Librosa,MedGemma,Ollama ai;
+```
 
 ### **Hybrid AI Stack**
 -   **Reasoning Engine**: `MedGemma 4B` (running locally via **Ollama**).
@@ -86,3 +135,8 @@ We simulate the integration of **HeAR (Health Acoustic Representations)** to go 
     npm run dev
     # Visit http://localhost:3000
     ```
+
+## Demo
+
+[![Watch the demo](https://img.youtube.com/vi/0F5j3puTxPI/0.jpg)](https://www.youtube.com/watch?v=0F5j3puTxPI)
+
