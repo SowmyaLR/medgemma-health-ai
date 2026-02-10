@@ -1,4 +1,7 @@
 # VaidyaSaarathi 🏥
+<img width="1024" height="1024" alt="vaidyasaarathi" src="https://github.com/user-attachments/assets/a87145a1-8fd6-469a-a5b7-3961c7646d34" />
+
+
 ## AI-Assisted Clinical Triage for Multilingual Healthcare
 
 [![Med-Gemma Impact Challenge](https://img.shields.io/badge/Med--Gemma-Impact%20Challenge-red.svg)](https://www.kaggle.com/competitions/med-gemma-impact-challenge)
